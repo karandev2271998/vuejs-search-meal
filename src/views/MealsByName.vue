@@ -56,7 +56,7 @@ function getMealByKeyword() {
 onMounted(() => {
   keyword.value = route.params.name;
   if(keyword.value){
-    getMealByKeyword();
+    getMealByKeyword(); 
   }
 });
 </script>
