@@ -1,16 +1,5 @@
 <template>
   <div class="flex flex-col p-8">
-    <!--  Search meals by letter name start  -->
-    <div class="flex justify-center gap-3 mt-2">
-      <router-link
-        :to="{ name: 'byLetter', params: { letter } }"
-        v-for="letter of letters"
-        :key="letter"
-      >
-        {{ letter }}
-      </router-link>
-    </div>
-    <!--  Search meals by letter name end  -->
   </div>
 </template>
 
