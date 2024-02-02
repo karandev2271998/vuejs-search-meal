@@ -1,5 +1,8 @@
 <template>
-  <div class="p-8 bg-gray-100 pb-0">
+  <div class="p-8 pb-0">
+    <h1 class="text-4xl font-bold mb-4 text-orange-500">Search Meals by Name</h1>
+  </div>
+  <div class="px-8 pb-3">
     <!--  Search meals by Keyword start  -->
     <input
       type="text"
@@ -9,28 +12,27 @@
       @change="getMealByKeyword"
     />
     <!--  Search meals by Keyword name end  -->
-    <p class="font-bold text-2xl justify-center item-center" v-if="!meals">There is no items.</p>
   </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-5 gap-5 p-8" v-if="meals">
-    <div v-for="meal of meals" :key="meal.idMeal" class="bg-white shadow rounded-xl">
-      <MealList :meal="meal" :btnName="'YouTube'" />
-    </div>
-  </div>
+<Meals :meals="meals" />
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import store from "../store";
 import { useRoute } from "vue-router";
-import MealList from "../components/MealList.vue";
+import Meals from "../components/Meals.vue";
 
 let keyword = ref("");
 let route = useRoute();
-let meals = computed(() => store.state.searchedMeals);
+let meals = computed(() => {
+  return store.state.searchedMeals;
+});
+
 function getMealByKeyword() {
-  if(keyword.value){
+  if (keyword.value) {
     store.dispatch("searchMeal", keyword.value);
+  }else{
+    store.commit('setSearchedMeals', []);
   }
 }
 onMounted(() => {
@@ -39,4 +41,5 @@ onMounted(() => {
     getMealByKeyword();
   }
 });
+
 </script>

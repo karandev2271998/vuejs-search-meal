@@ -1,13 +1,8 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-5 gap-5 p-8">
-    <div v-for="meal of meals" :key="meal.idMeal" class="bg-white shadow rounded-xl">
-      <MealList :meal="meal" :btnName="'YouTube'" />
-    </div>
-
-    <div v-if="!meals" class="flex justify-center text-2xl">
-      <p>Oops! Meal item not found</p>
-    </div>
+  <div class="p-8 pb-0">
+    <h1 class="text-4xl font-bold mb-4 text-orange-500">Meals for {{ ingredient.strIngredient }}</h1>
   </div>
+  <Meals :meals="meals" />
 </template>
 
 <script setup>
@@ -15,10 +10,11 @@ import { computed, onMounted } from "vue";
 import store from "../store";
 import axiosClient from "../axios";
 import { useRoute } from "vue-router";
-import MealList from "../components/MealList.vue";
-
-const meals = computed(() => store.state.searchedMealsByIngredient);
+import Meals from '../components/Meals.vue'
 const route = useRoute();
+const ingredient = computed(() => store.state.ingredient)
+const meals = computed(() => store.state.searchedMealsByIngredient)
+console.log(meals);
 
 onMounted(() => {
   store.dispatch("serachMealByIngredient", route.params.ingredient);

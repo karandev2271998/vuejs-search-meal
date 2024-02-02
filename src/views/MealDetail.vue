@@ -1,8 +1,8 @@
 <template>
   <div class="max-w-[800px] mx-auto p-8" v-if="mealInfo">
-    <h1 class="text-5xl font-bold mb-5 mt-5">{{ mealInfo.strMeal }}</h1>
+    <h1 class="text-4xl font-bold mb-5 text-orange-500">{{ mealInfo.strMeal }}</h1>
     <img :src="mealInfo.strMealThumb" :alt="mealInfo.strMeal" class="max-w[100%]"/>
-    <div class="grid gird-cols-1 sm:grid-cols-3 mb-2 text-lg py-2" v-if="getData">
+    <div class="grid grid-cols-1 sm:grid-cols-3 text-lg py-2" v-if="getData">
       <div><strong class="font-bold">Category</strong>: {{ mealInfo.strCategory }}</div>
       <div><strong class="font-bold">Area</strong>: {{ mealInfo.strArea }}</div>
       <div><strong class="font-bold">Tags</strong>: {{ mealInfo.strTags }}</div>
@@ -14,7 +14,7 @@
       <div>
         <h2 class="text-2xl font-semibold mb-2">Ingredient</h2>
         <ul>
-          <template v-for="i in 20">
+          <template v-for="i in 20" :key="i">
             <li v-if="mealInfo[`strIngredient${i}`]">
               {{ i }}. {{ mealInfo[`strIngredient${i}`] }}
             </li>
@@ -24,7 +24,7 @@
       <div>
         <h2 class="text-2xl font-semibold mb-2">Measures</h2>
         <ul>
-          <template v-for="i in 20">
+          <template v-for="i in 20" :key="i">
             <li v-if="mealInfo[`strMeasure${i}`]">
               {{ mealInfo[`strMeasure${i}`] }}
             </li>
@@ -39,7 +39,7 @@
         <a
           :href="mealInfo.strSource"
           target="_blank"
-          class="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          class="ml-3 px-3 py-2 rounded border-2 border-transparent text-indigo-600 transition-colors"
         >
           View Original Source
         </a>
