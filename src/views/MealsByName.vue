@@ -9,7 +9,7 @@
       @change="getMealByKeyword"
     />
     <!--  Search meals by Keyword name end  -->
-    <p v-if="false">Oops! This item is not exist in our database.</p>
+    <p class="font-bold text-2xl justify-center item-center" v-if="!meals">There is no items.</p>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-5 gap-5 p-8" v-if="meals">
@@ -29,7 +29,9 @@ let keyword = ref("");
 let route = useRoute();
 let meals = computed(() => store.state.searchedMeals);
 function getMealByKeyword() {
-  store.dispatch("searchMeal", keyword.value);
+  if(keyword.value){
+    store.dispatch("searchMeal", keyword.value);
+  }
 }
 onMounted(() => {
   keyword.value = route.params.name;
